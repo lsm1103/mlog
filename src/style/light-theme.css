@@ -1,0 +1,299 @@
+/* 
+ * 白天模式样式 - 只在 data-theme="light" 时生效
+ * 不修改任何现有的黑夜模式样式
+ */
+
+/* 只有当 body 有 data-theme="light" 属性时，以下样式才会生效 */
+body[data-theme="light"] {
+  /* 全局变量覆盖 */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #f1f3f4;
+  --text-primary: #1a1a1a;
+  --text-secondary: #4a4a4a;
+  --text-tertiary: #6b7280;
+  --border-color: #e5e7eb;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  
+  /* 基础样式覆盖 */
+  background-color: #ffffff !important;
+  color: #1a1a1a !important;
+}
+
+/* Header 样式 */
+body[data-theme="light"] header {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+body[data-theme="light"] header .logo span {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] header .nav a {
+  color: #4a4a4a !important;
+}
+
+body[data-theme="light"] header .nav a.active {
+  color: #752bec !important;
+}
+
+body[data-theme="light"] header .icon i {
+  color: #4a4a4a !important;
+}
+
+/* 文档内容区域 */
+body[data-theme="light"] #doc {
+  background-color: #ffffff !important;
+}
+
+body[data-theme="light"] .doc {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .doc h1,
+body[data-theme="light"] .doc h2,
+body[data-theme="light"] .doc h3,
+body[data-theme="light"] .doc h4,
+body[data-theme="light"] .doc h5,
+body[data-theme="light"] .doc h6 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .doc p {
+  color: #4a4a4a !important;
+}
+
+body[data-theme="light"] .doc strong {
+  color: #1a1a1a !important;
+}
+
+/* 代码块 */
+body[data-theme="light"] .doc pre {
+  background: #f8f9fa !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+body[data-theme="light"] .doc code {
+  background: #e5e7eb !important;
+  color: #1a1a1a !important;
+}
+
+/* 表格 */
+body[data-theme="light"] .doc table {
+  border-color: #e5e7eb !important;
+}
+
+body[data-theme="light"] .doc table td,
+body[data-theme="light"] .doc table th {
+  border-color: #e5e7eb !important;
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .doc table thead th {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .doc table tr:nth-child(odd) td {
+  background: #f8f9fa !important;
+}
+
+/* 引用块 */
+body[data-theme="light"] .doc blockquote {
+  background: #f8f9fa !important;
+  border-left-color: #e5e7eb !important;
+  color: #4a4a4a !important;
+}
+
+body[data-theme="light"] .doc blockquote p {
+  color: #4a4a4a !important;
+}
+
+/* 链接 */
+body[data-theme="light"] .doc a {
+  color: #752bec !important;
+}
+
+/* 列表 */
+body[data-theme="light"] .doc ul li {
+  color: #4a4a4a !important;
+}
+
+/* 菜单区域 */
+body[data-theme="light"] .menu {
+  background: #ffffff !important;
+  border-right: 1px solid #e5e7eb;
+}
+
+body[data-theme="light"] .menu a {
+  color: #4a4a4a !important;
+}
+
+body[data-theme="light"] .menu a:hover,
+body[data-theme="light"] .menu a.active {
+  color: #752bec !important;
+}
+
+/* 侧边栏 */
+body[data-theme="light"] .side {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .side p {
+  color: #6b7280 !important;
+}
+
+body[data-theme="light"] .side p.current {
+  color: #752bec !important;
+}
+
+body[data-theme="light"] .side .hl {
+  background: #752bec !important;
+}
+
+/* Mermaid 图表 */
+body[data-theme="light"] .doc .mermaid {
+  background: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+/* 滚动条样式 */
+body[data-theme="light"] ::-webkit-scrollbar-track {
+  background: #f1f1f1 !important;
+}
+
+body[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: #c1c1c1 !important;
+}
+
+body[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8 !important;
+}
+
+/* 移动端菜单 */
+body[data-theme="light"] .open-menu {
+  background: rgba(255, 255, 255, 0.9) !important;
+  color: #1a1a1a !important;
+}
+
+/* ========== 首页组件样式 ========== */
+
+/* Banner 区域 */
+body[data-theme="light"] .banner {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .banner h1,
+body[data-theme="light"] .banner h2,
+body[data-theme="light"] .banner h3 {
+  color: #1a1a1a !important;
+}
+
+/* 功能介绍卡片区域 */
+body[data-theme="light"] .intro {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .block-box .block {
+  background: #f8f9fa !important;
+  border: 1px solid #e5e7eb;
+}
+
+body[data-theme="light"] .block-box .block i {
+  background: #ffffff !important;
+  color: inherit !important;
+  border: 1px solid #e5e7eb;
+}
+
+body[data-theme="light"] .block-box .block h4 {
+  color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .block-box .block h6 {
+  color: #4a4a4a !important;
+}
+
+/* Banner 按钮 */
+body[data-theme="light"] .banner .btn a {
+  color: #ffffff !important;
+  background: #752bec !important;
+  border: 1px solid #752bec !important;
+}
+
+body[data-theme="light"] .banner .btn a:hover {
+  background: #6a25d6 !important;
+  border-color: #6a25d6 !important;
+}
+
+/* 项目预览区域 */
+body[data-theme="light"] .preview {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .change {
+  background: #ffffff !important;
+}
+
+body[data-theme="light"] .change i {
+  color: #4a4a4a !important;
+}
+
+body[data-theme="light"] .change i:hover {
+  color: #752bec !important;
+}
+
+body[data-theme="light"] .change i.active {
+  color: #ffffff !important;
+}
+
+/* 白天模式下的切换器背景 */
+body[data-theme="light"] .change {
+  background: #e5e7eb !important;
+}
+
+body[data-theme="light"] .change .dark,
+body[data-theme="light"] .change .light {
+  background: #752bec !important;
+}
+
+/* Footer 区域 */
+body[data-theme="light"] footer {
+  background: #f8f9fa !important;
+  border-top: 1px solid #e5e7eb !important;
+}
+
+body[data-theme="light"] footer .links span,
+body[data-theme="light"] footer .links a {
+  color: #4a4a4a !important;
+}
+
+body[data-theme="light"] footer .links a:hover {
+  color: #752bec !important;
+}
+
+body[data-theme="light"] footer .info {
+  color: #6b7280 !important;
+}
+
+/* 移动端样式适配 */
+@media screen and (max-width: 576px) {
+  body[data-theme="light"] .nav {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid #e5e7eb;
+  }
+  
+  body[data-theme="light"] .nav a {
+    color: #4a4a4a !important;
+    border-top-color: #e5e7eb !important;
+  }
+  
+  body[data-theme="light"] .open-menu {
+    border-top-color: #e5e7eb !important;
+    border-bottom-color: #e5e7eb !important;
+  }
+  
+  body[data-theme="light"] footer .info {
+    border-top-color: #e5e7eb !important;
+  }
+}

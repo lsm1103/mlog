@@ -7,6 +7,9 @@ export default {
 		sveltePreprocess(),
 		markdown({
 			highlight(code, lang) {
+				if (lang === 'mermaid') {
+					return `<pre class="mermaid">${code}</pre>`;
+				}
 				return hljs.highlight(code, { language: lang }).value;
 			},
 		}),

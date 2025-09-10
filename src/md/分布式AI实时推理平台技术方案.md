@@ -216,35 +216,35 @@ sequenceDiagram
 
 ```mermaid
 graph TD
-    subgraph 客户端 Client Side
-        Client[<fa:fa-user> 客户端应用<br> Web/Mobile]
+    subgraph 客户端["🖥️ 客户端 Client Side"]
+        Client["📱 客户端应用<br/>Web/Mobile"]
     end
 
-    subgraph 云端/数据中心 Server Side
-        API_GW[<fa:fa-shield> API网关<br> Nginx/Kong]
-        Push_GW[<fa:fa-tower> WebSocket推送网关<br> Socket.IO/FastAPI]
-        MQ[<fa:fa-exchange> 消息队列<br> RabbitMQ/Kafka]
-        Redis[<fa:fa-database> Redis<br> Pub/Sub & Cache]
+    subgraph 云端["☁️ 云端/数据中心 Server Side"]
+        API_GW["🛡️ API网关<br/>Nginx/Kong"]
+        Push_GW["📡 WebSocket推送网关<br/>Socket.IO/FastAPI"]
+        MQ["📬 消息队列<br/>RabbitMQ/Kafka"]
+        Redis["🗃️ Redis<br/>Pub/Sub & Cache"]
         
-        subgraph AI推理集群 GPU Workers
-            W1[<fa:fa-microchip> Worker 1]
-            W2[<fa:fa-microchip> Worker 2]
-            W3[<fa:fa-microchip> Worker N]
+        subgraph GPU["🚀 AI推理集群 GPU Workers"]
+            W1["🔧 Worker 1"]
+            W2["🔧 Worker 2"]
+            W3["🔧 Worker N"]
         end
     end
 
-    Client -- |1. 建立WebSocket长连接| --> Push_GW
-    Client -- |2. 发起HTTP推理请求| --> API_GW
-    API_GW -- |3. 发布任务到消息队列| --> MQ
-    Push_GW -- |订阅结果频道| --> Redis
-    W1 -- |消费任务| --> MQ
-    W2 -- |消费任务| --> MQ
-    W3 -- |消费任务| --> MQ
-    W1 -- |发布结果到Redis Pub/Sub| --> Redis
-    W2 -- |发布结果到Redis Pub/Sub| --> Redis
-    W3 -- |发布结果到Redis Pub/Sub| --> Redis
-    Redis -- |通知新结果| --> Push_GW
-    Push_GW -- |通过WebSocket推送结果| --> Client
+    Client -->|1. 建立WebSocket长连接| Push_GW
+    Client -->|2. 发起HTTP推理请求| API_GW
+    API_GW -->|3. 发布任务到消息队列| MQ
+    Push_GW -->|订阅结果频道| Redis
+    W1 -->|消费任务| MQ
+    W2 -->|消费任务| MQ
+    W3 -->|消费任务| MQ
+    W1 -->|发布结果到Redis Pub/Sub| Redis
+    W2 -->|发布结果到Redis Pub/Sub| Redis
+    W3 -->|发布结果到Redis Pub/Sub| Redis
+    Redis -->|通知新结果| Push_GW
+    Push_GW -->|通过WebSocket推送结果| Client
 ```
 
 **数据流转时序图 (Sequence Diagram)**

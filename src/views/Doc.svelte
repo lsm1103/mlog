@@ -11,6 +11,7 @@
 	import { location } from 'svelte-spa-router';
 	import '@/style/common/markdown.less';
 	import 'highlight.js/styles/github-dark.css';
+	import mermaid from 'mermaid';
 
 	let docMain = {};
 	let sidebar = [];
@@ -18,6 +19,7 @@
 	let h3 = [];
 	let sideDom;
 	let isMobile = getContext('mobile');
+	let theme = getContext('theme');
 	let boxHeight = window.innerHeight - 124;
 	let menuShow = isMobile ? false : true;
 
@@ -25,6 +27,61 @@
 	const _location = `#${decodeURIComponent($location)}`;
 
 	$: sideTop = sideNum == 0 ? 16 : sideNum * 32 + 16;
+	
+	// 当主题变化时重新渲染 mermaid 图表
+	$: if ($theme && docMain && docMain.querySelectorAll) {
+		setTimeout(() => {
+			renderMermaid();
+		}, 200);
+	}
+	
+	function renderMermaid() {
+		if (!docMain || !docMain.querySelectorAll) return;
+		
+		try {
+			// 移除所有现有的 mermaid SVG
+			const existingSvgs = docMain.querySelectorAll('.mermaid svg');
+			existingSvgs.forEach(svg => {
+				svg.parentNode.removeChild(svg);
+			});
+			
+			// 查找所有 mermaid 容器
+			const mermaidElements = docMain.querySelectorAll('.mermaid');
+			
+			if (mermaidElements.length === 0) return;
+			
+			// 清理和重置每个 mermaid 元素
+			mermaidElements.forEach((element, index) => {
+				// 如果有保存的原始内容，恢复它
+				if (element.dataset.originalContent) {
+					element.textContent = element.dataset.originalContent;
+				}
+				
+				// 确保元素有唯一 ID
+				if (!element.id) {
+					element.id = `mermaid-diagram-${index}`;
+				}
+				
+				// 清理元素状态
+				element.removeAttribute('data-processed');
+			});
+			
+			// 重新初始化 mermaid
+			mermaid.initialize({ 
+				startOnLoad: false,
+				theme: $theme === 'light' ? 'default' : 'dark',
+				securityLevel: 'loose'
+			});
+			
+			// 使用 mermaid.run() 渲染
+			setTimeout(() => {
+				mermaid.run();
+			}, 50);
+			
+		} catch (error) {
+			console.warn('Mermaid rendering error:', error);
+		}
+	}
 
 	export let params = {};
 	console.log(params);
@@ -61,6 +118,44 @@
 		});
 		if (isMobile) {
 			menuShow = false;
+		}
+		
+		// Initialize and render mermaid diagrams
+		setTimeout(() => {
+			initializeMermaid();
+		}, 150);
+	}
+	
+	function initializeMermaid() {
+		if (!docMain || !docMain.querySelectorAll) return;
+		
+		try {
+			const mermaidElements = docMain.querySelectorAll('.mermaid');
+			
+			if (mermaidElements.length === 0) return;
+			
+			// 为每个 mermaid 元素保存原始内容和设置 ID
+			mermaidElements.forEach((element, index) => {
+				const textContent = element.textContent || element.innerText;
+				if (textContent.trim()) {
+					element.dataset.originalContent = textContent.trim();
+					element.id = `mermaid-${index}-${Date.now()}`;
+				}
+			});
+			
+			// 初始化并渲染
+			mermaid.initialize({ 
+				startOnLoad: false,
+				theme: $theme === 'light' ? 'default' : 'dark',
+				securityLevel: 'loose'
+			});
+			
+			setTimeout(() => {
+				mermaid.run();
+			}, 100);
+			
+		} catch (error) {
+			console.warn('Mermaid initialization error:', error);
 		}
 	}
 

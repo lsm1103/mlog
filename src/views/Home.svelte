@@ -7,9 +7,25 @@
 	import { getContext } from 'svelte';
 
 	let conf = getContext('config');
-	let skin = 'dark';
+	let theme = getContext('theme');
 	let page = 'home';
+	
+	// 让预览图片与全局主题同步
+	$: skin = $theme === 'light' ? 'light' : 'dark';
 	$: preview = require(`${skin}.jpg`);
+	
+	// 主题切换函数
+	function handleThemeChange(newTheme) {
+		if (newTheme === 'dark') {
+			theme.set('dark');
+			document.body.setAttribute('data-theme', 'dark');
+		} else {
+			theme.set('light');
+			document.body.setAttribute('data-theme', 'light');
+		}
+		// 同步到 localStorage
+		localStorage.setItem('edoc-theme', newTheme);
+	}
 </script>
 
 <Scroll>
@@ -24,36 +40,36 @@
 				<h3>{val}</h3>
 			{/each}
 			<div class="btn">
-				<!-- <a href="#/doc/概述">开始使用</a>
-				<a href="#/doc/演示">查看演示</a> -->
+				<a href="#/doc/概述">开始使用</a>
+				<a href="#/doc/演示">查看演示</a>
 			</div>
 		</div>
 	</section>
 	<!-- 项目预览 -->
-	<!-- {#if conf['preview']}
+	{#if conf['preview']}
 		<section>
 			<div class="preview">
 				<img src={preview} alt="项目预览" />
 			</div>
 			<div class="change">
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<i
-					class="ri-moon-line"
-					on:click={() => {
-						skin = 'dark';
-					}}
+					class="ri-moon-line {$theme === 'dark' ? 'active' : ''}"
+					on:click={() => handleThemeChange('dark')}
+					title="切换到夜间模式"
 				/>
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<i
-					class="ri-sun-line"
-					on:click={() => {
-						skin = 'light';
-					}}
+					class="ri-sun-line {$theme === 'light' ? 'active' : ''}"
+					on:click={() => handleThemeChange('light')}
+					title="切换到白天模式"
 				/>
 				<div class={skin} />
 			</div>
 		</section>
-	{/if} -->
+	{/if}
 	<!-- 功能介绍 -->
-	<!-- <div class="intro">
+	<div class="intro">
 		<div class="block-box">
 			<Block col="4">
 				<i class="ri-brush-2-line color-blue" />
@@ -71,7 +87,7 @@
 				<h6>内置了HTTP服务器，秒级启动</h6>
 			</Block>
 		</div>
-	</div> -->
+	</div>
 	<!-- 底部 -->
-	<!-- <Footer {page} /> -->
+	<Footer {page} />
 </Scroll>
