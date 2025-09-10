@@ -10,10 +10,11 @@ export default {
                 if (lang === 'mermaid') {
                     return `<pre class="mermaid">${code}</pre>`;
                 }
-                if (lang === 'html-render') { // 新增这个条件
-                    return code; // 直接返回HTML代码让它渲染
+                if (lang === 'html-render') {
+                    // 处理html-render为html代码，但添加特殊类名
+                    const highlighted = hljs.highlight(code, { language: 'html' }).value;
+                    return `<span class="html-render-marker"></span>${highlighted}`;
                 }
-                return hljs.highlight(code, { language: lang }).value;
             },
         }),
     ],
